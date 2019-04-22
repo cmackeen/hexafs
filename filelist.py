@@ -16,7 +16,7 @@ import os
 rootdir = './xxdmini'
 
 
-class file_compile:
+class File_Compile:
 	def __init__(self, rootdir):
 		self.datain= rootdir
 
@@ -27,9 +27,10 @@ class file_compile:
 				if (pd.Series(file).str.contains('pre')[0]) and (pd.Series(file).str.contains('dat')[0]):
 					filels.append(str(os.path.join(subdir, file)))
 
-		
-
+				
+		fls=pd.Series(filels)
+		filels=fls[fls.str.contains('/es/')]
 		return filels
 
-b=file_compile(rootdir)
+b=File_Compile(rootdir)
 filels=b.lister()
