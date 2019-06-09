@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 
 '''
 we're using  python3 for this . . 
+
+and we are portable
 '''
 
 #datain="043b2gg_pre.dat"
