@@ -4,6 +4,7 @@ from xraydb import XrayDB
 import sklearn as skl
 import matplotlib.pyplot as plt
 from readers import *
+from xas_character import *
 from filelist import *
 
 '''
@@ -23,6 +24,22 @@ class XAS_EStats:
 		b=File_Compile(rootdir)
 		filels=b.lister()
 		return filels
+
+	def signoise(filels, inter, edge):
+		jj=inter
+		data=EData(filels[jj])
+		df=data.reader(data.datain)
+		edgelib=XrayDB()
+		edgenom=edgelib.xray_edge(edge,'K')[0]
+		if len(df[df['e']>100+edgenom])<20:
+			edgenom=edgelib.xray_edge(edge,'L3')[0]
+		dftrim=df[df['e']>100+edgenom]
+		xfsmean=dftrim[dftrim.columns[1]].mean()
+		xfsstd=dftrim[dftrim.columns[1]].std()
+		return xfsmean,xfsstd
+
+
+                
 
 	def edgenom(filels,inter):
 		jj=inter
